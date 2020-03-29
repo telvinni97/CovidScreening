@@ -792,7 +792,7 @@
           "x": 1390,
           "y": 3830
         },
-        "say": "Based on your responses, you should contact your healthcare provider.\n\nYou should reach out to your doctor’s office or local health department for more information. Please stay at home and avoid close contact with other people, including your family members. If possible, allocate a room and a restroom for yourself for at least 7 days from when you first experienced symptoms. If your symptoms worsen, contact your doctor’s office immediately. \n\nThank you for using our service.\nStay safe and take care.",
+        "say": "Based on your responses, you should contact your healthcare provider.\n\nYou should reach out to your doctorÂ’s office or local health department for more information. Please stay at home and avoid close contact with other people, including your family members. If possible, allocate a room and a restroom for yourself for at least 7 days from when you first experienced symptoms. If your symptoms worsen, contact your doctorÂ’s office immediately. \n\nThank you for using our service.\nStay safe and take care.",
         "play": null,
         "language": null
       },

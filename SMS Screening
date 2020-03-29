@@ -7,6 +7,8 @@ app = Flask(__name__)
 
 @app.route("/sms", methods=['GET', 'POST'])
 
+# Shoutout to my mentee Carolyn Hu! You're amazing!!!
+
 def incoming_sms():
     global counter
     global risk

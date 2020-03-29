@@ -5,7 +5,7 @@
 
 <p align="center"> :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire:</p>
 
-<p align="center"> "Telvin Zhong, Ethan Domingo, and Mareesh Kumar Issar **(Team QuaranTwilio)** are proud to present our convenient, accessible, and free COVID-19 Screening Service!"</p>
+<p align="center"> "Telvin Zhong, Ethan Domingo, and Mareesh Kumar Issar **Team QuaranTwilio** are proud to present our convenient, accessible, and free COVID-19 Screening Service!"</p>
 
 
 <p align="center">  :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire:</p>

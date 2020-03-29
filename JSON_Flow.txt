@@ -1,0 +1,1212 @@
+{
+  "description": "A New Flow",
+  "states": [
+    {
+      "name": "Trigger",
+      "type": "InitialState",
+      "properties": {
+        "offset": {
+          "x": 0,
+          "y": 0
+        },
+        "flow_url": "https://webhooks.twilio.com/v1/Accounts/ACcc467622727d5a994e04a374962c4947/Flows/FWdc55ee50f73fd606f5c952eb24898e5c"
+      },
+      "transitions": [
+        {
+          "event": "incomingMessage",
+          "conditions": [],
+          "next": null,
+          "uuid": "10b04e63-dc63-4411-930f-4ff1342af86c"
+        },
+        {
+          "event": "incomingCall",
+          "conditions": [],
+          "next": "FF98a5e86153f921f99a788bfc510e3e10",
+          "uuid": "4a58acf4-147e-4a8a-adb4-0c9b0a4604cd"
+        },
+        {
+          "event": "incomingRequest",
+          "conditions": [],
+          "next": null,
+          "uuid": "359e44cb-a7d5-471a-95ee-396806e6ccc5"
+        }
+      ],
+      "sid": "FFa0101f422433631af43eda9b920c4d4a"
+    },
+    {
+      "sid": "FF98a5e86153f921f99a788bfc510e3e10",
+      "name": "gather_input",
+      "type": "Gather",
+      "properties": {
+        "loop": 1,
+        "timeout": "5",
+        "stop_gather": true,
+        "finish_on_key": "#",
+        "offset": {
+          "x": 0,
+          "y": 250
+        },
+        "say": "Hello, welcome to COVID-19 screening service created for LA HACKS 2020.\n\nPlease note, this is not a substitute for professional medical advice, diagnosis or treatment. \n \nPlease hang up and call 911 or seek advice from medical professionals if you are experiencing any of the following symptoms.\n\nConstant chest pain or pressure, extreme difficulty breathing, severe, constant dizziness, slurred speech, and difficulty waking up\n\nTo continue, press 1.",
+        "language": null,
+        "gather_language": "en",
+        "voice": null,
+        "speech_timeout": "auto",
+        "profanity_filter": "true",
+        "play": null,
+        "number_of_digits": "1"
+      },
+      "transitions": [
+        {
+          "widgetId": "FF98a5e86153f921f99a788bfc510e3e10",
+          "uuid": "9f210ae2-fcd4-43e4-8316-68c2c28b1c90",
+          "event": "keypress",
+          "conditions": [],
+          "next": "FFcb7c423e7a96c4bec32bcc28b5560db0"
+        },
+        {
+          "widgetId": "FF98a5e86153f921f99a788bfc510e3e10",
+          "uuid": "9621839b-0ffb-45f5-864e-551cd5ada282",
+          "event": "speech",
+          "conditions": [],
+          "next": null
+        },
+        {
+          "widgetId": "FF98a5e86153f921f99a788bfc510e3e10",
+          "uuid": "e467fd2a-9ca1-40ae-8794-76e3198ec5aa",
+          "event": "timeout",
+          "conditions": [],
+          "next": null
+        }
+      ]
+    },
+    {
+      "sid": "FFcb7c423e7a96c4bec32bcc28b5560db0",
+      "name": "split_key_press",
+      "type": "Branch",
+      "properties": {
+        "offset": {
+          "x": -60,
+          "y": 510
+        },
+        "input": "{{widgets.gather_input.Digits}}"
+      },
+      "transitions": [
+        {
+          "widgetId": "FFcb7c423e7a96c4bec32bcc28b5560db0",
+          "uuid": "1d0572aa-9242-41aa-8fee-8759028052b6",
+          "event": "noMatch",
+          "conditions": [],
+          "next": "FF8186571392a37a64a95d784b7afcaecd"
+        },
+        {
+          "uuid": "0396bff3-660c-4ba9-869b-41e26f965263",
+          "event": "match",
+          "conditions": [
+            {
+              "type": "equal_to",
+              "friendly_name": "If value equal_to 1",
+              "value": "1"
+            }
+          ],
+          "next": "FFff631435b1f33a44618e3aebf018c070"
+        }
+      ]
+    },
+    {
+      "sid": "FFf43a6d80fcaf11b1293a41b2ebabf0a2",
+      "name": "gather_international_travel",
+      "type": "Gather",
+      "properties": {
+        "loop": 1,
+        "timeout": "5",
+        "stop_gather": true,
+        "finish_on_key": "#",
+        "offset": {
+          "x": 50,
+          "y": 750
+        },
+        "language": null,
+        "gather_language": "en",
+        "voice": null,
+        "speech_timeout": "auto",
+        "profanity_filter": "true",
+        "play": null,
+        "say": "Did you travel internationally within the last 14 days? \n\nFor yes, press 1.\n\nFor no, press 2."
+      },
+      "transitions": [
+        {
+          "widgetId": "FFf43a6d80fcaf11b1293a41b2ebabf0a2",
+          "uuid": "1e802fa8-c86d-47d9-8213-afd879550850",
+          "event": "keypress",
+          "conditions": [],
+          "next": "FF9bd246a6202524e6e719b1a5198b755b"
+        },
+        {
+          "widgetId": "FFf43a6d80fcaf11b1293a41b2ebabf0a2",
+          "uuid": "46d6acf8-e359-4736-82cd-8b035afe8b0a",
+          "event": "speech",
+          "conditions": [],
+          "next": null
+        },
+        {
+          "widgetId": "FFf43a6d80fcaf11b1293a41b2ebabf0a2",
+          "uuid": "ef3fd20a-46b7-45b6-9562-f8bac7f0b0d7",
+          "event": "timeout",
+          "conditions": [],
+          "next": null
+        }
+      ]
+    },
+    {
+      "sid": "FF9bd246a6202524e6e719b1a5198b755b",
+      "name": "split_key_press_1",
+      "type": "Branch",
+      "properties": {
+        "offset": {
+          "x": 90,
+          "y": 970
+        },
+        "input": "{{widgets.gather_international_travel.Digits}}"
+      },
+      "transitions": [
+        {
+          "widgetId": "FF9bd246a6202524e6e719b1a5198b755b",
+          "uuid": "a62320cd-e713-48a7-bda9-195a97a32860",
+          "event": "noMatch",
+          "conditions": [],
+          "next": "FF397c13cce3c38a1c59859cef4f1361f7"
+        },
+        {
+          "uuid": "7b725b87-d952-4c72-875b-db73ab1841ca",
+          "event": "match",
+          "conditions": [
+            {
+              "type": "equal_to",
+              "friendly_name": "If value equal_to 1",
+              "value": "1"
+            }
+          ],
+          "next": "FF5c30b7b0d6b0a6bdd0a373aed9daf913"
+        },
+        {
+          "uuid": "2fe6d402-e055-45eb-ac07-547682693bab",
+          "event": "match",
+          "conditions": [
+            {
+              "type": "equal_to",
+              "friendly_name": "If value equal_to 2",
+              "value": "2"
+            }
+          ],
+          "next": "FFd969e171a787cc8b914d76536d9dac21"
+        }
+      ]
+    },
+    {
+      "sid": "FF5c30b7b0d6b0a6bdd0a373aed9daf913",
+      "name": "set_variables_1",
+      "type": "SetVariables",
+      "properties": {
+        "variables": [
+          {
+            "key": "count",
+            "value": "{% if flow.variables.count %}\n  {{flow.variables.count | plus: 3}}\n{% else %}\n  1\n{% endif %}",
+            "index": 0
+          }
+        ],
+        "offset": {
+          "x": 53.00106193528859,
+          "y": 1240.7883542662478
+        }
+      },
+      "transitions": [
+        {
+          "widgetId": "FF5c30b7b0d6b0a6bdd0a373aed9daf913",
+          "uuid": "5891f009-fae5-43f7-afb4-058f905d9129",
+          "event": "next",
+          "conditions": [],
+          "next": "FFd969e171a787cc8b914d76536d9dac21"
+        }
+      ]
+    },
+    {
+      "sid": "FFd969e171a787cc8b914d76536d9dac21",
+      "name": "gather_high_risk_travel",
+      "type": "Gather",
+      "properties": {
+        "loop": 1,
+        "timeout": "5",
+        "stop_gather": true,
+        "finish_on_key": "#",
+        "offset": {
+          "x": 470,
+          "y": 1260
+        },
+        "language": null,
+        "gather_language": "en",
+        "voice": null,
+        "speech_timeout": "auto",
+        "profanity_filter": "true",
+        "play": null,
+        "say": "During the last 14 days did you visit any area where COVID-19 is widespread?\n\nFor yes, press 1.\n\nFor no, press 2.",
+        "number_of_digits": "6"
+      },
+      "transitions": [
+        {
+          "widgetId": "FFf43a6d80fcaf11b1293a41b2ebabf0a2",
+          "uuid": "b6b75ff0-efe1-4401-b40c-41645ba86eb4",
+          "event": "keypress",
+          "conditions": [],
+          "next": "FF0d46be1df98b109216f3149f75d119c8"
+        },
+        {
+          "widgetId": "FFf43a6d80fcaf11b1293a41b2ebabf0a2",
+          "uuid": "b3df8f77-cb2e-43fc-9466-a0bc7b12246d",
+          "event": "speech",
+          "conditions": [],
+          "next": null
+        },
+        {
+          "widgetId": "FFf43a6d80fcaf11b1293a41b2ebabf0a2",
+          "uuid": "f0e54212-785c-4186-b66f-4a079bc33928",
+          "event": "timeout",
+          "conditions": [],
+          "next": null
+        }
+      ]
+    },
+    {
+      "sid": "FF0d46be1df98b109216f3149f75d119c8",
+      "name": "split_key_press_2",
+      "type": "Branch",
+      "properties": {
+        "offset": {
+          "x": 440,
+          "y": 1500
+        },
+        "input": "{{widgets.gather_high_risk_travel.Digits}}"
+      },
+      "transitions": [
+        {
+          "widgetId": "FF9bd246a6202524e6e719b1a5198b755b",
+          "uuid": "74b13929-e93a-4e2b-8c18-195275b47200",
+          "event": "noMatch",
+          "conditions": [],
+          "next": "FF567ec42bbb2162a42b95c12a396bcc42"
+        },
+        {
+          "uuid": "ecbade3e-c8b1-4386-8298-e0ae3eb587d8",
+          "event": "match",
+          "conditions": [
+            {
+              "type": "equal_to",
+              "friendly_name": "If value equal_to 1",
+              "value": "1"
+            }
+          ],
+          "next": "FF73295ebf155e744f208317840c8f58b3"
+        },
+        {
+          "uuid": "02d2c1d6-104d-4c68-a9bc-b564ee98a6cb",
+          "event": "match",
+          "conditions": [
+            {
+              "type": "equal_to",
+              "friendly_name": "If value equal_to 2",
+              "value": "2"
+            }
+          ],
+          "next": "FF8ff06069366644a51ed340f5d0f933a9"
+        }
+      ]
+    },
+    {
+      "sid": "FF73295ebf155e744f208317840c8f58b3",
+      "name": "set_variables_2",
+      "type": "SetVariables",
+      "properties": {
+        "variables": [
+          {
+            "key": "count",
+            "value": "{% if flow.variables.count %}\n  {{flow.variables.count | plus: 1}}\n{% else %}\n  1\n{% endif %}",
+            "index": 0
+          }
+        ],
+        "offset": {
+          "x": 220,
+          "y": 1770
+        }
+      },
+      "transitions": [
+        {
+          "widgetId": "FF5c30b7b0d6b0a6bdd0a373aed9daf913",
+          "uuid": "1c006102-1472-418e-b3db-147b71834e08",
+          "event": "next",
+          "conditions": [],
+          "next": "FF8ff06069366644a51ed340f5d0f933a9"
+        }
+      ]
+    },
+    {
+      "sid": "FF56e4365f9e9a4fd0405dc46c5e8e5053",
+      "name": "gather_high_risk_work_place",
+      "type": "Gather",
+      "properties": {
+        "loop": 1,
+        "timeout": "5",
+        "stop_gather": true,
+        "finish_on_key": "#",
+        "offset": {
+          "x": 830,
+          "y": 1780
+        },
+        "language": null,
+        "gather_language": "en",
+        "voice": null,
+        "speech_timeout": "auto",
+        "profanity_filter": "true",
+        "play": null,
+        "say": "Do you live or work in a hospital or any other care facility? \n\nFor yes, press 1.\n\nFor no, press 2.",
+        "number_of_digits": "1"
+      },
+      "transitions": [
+        {
+          "widgetId": "FFf43a6d80fcaf11b1293a41b2ebabf0a2",
+          "uuid": "3f2984eb-5283-4641-8903-7ce8c4df545c",
+          "event": "keypress",
+          "conditions": [],
+          "next": "FFf4a370458b598ba8ee946ccaa568ee0a"
+        },
+        {
+          "widgetId": "FFf43a6d80fcaf11b1293a41b2ebabf0a2",
+          "uuid": "8d1f25fa-571f-46ca-8196-8df81db802e0",
+          "event": "speech",
+          "conditions": [],
+          "next": null
+        },
+        {
+          "widgetId": "FFf43a6d80fcaf11b1293a41b2ebabf0a2",
+          "uuid": "72a55d4e-5bac-46e3-9374-02e969bb9f34",
+          "event": "timeout",
+          "conditions": [],
+          "next": null
+        }
+      ]
+    },
+    {
+      "sid": "FFf4a370458b598ba8ee946ccaa568ee0a",
+      "name": "split_key_press_3",
+      "type": "Branch",
+      "properties": {
+        "offset": {
+          "x": 830,
+          "y": 2040
+        },
+        "input": "{{widgets.gather_high_risk_work_place.Digits}}"
+      },
+      "transitions": [
+        {
+          "widgetId": "FF9bd246a6202524e6e719b1a5198b755b",
+          "uuid": "800ccd2f-9862-4832-93e4-e693d0b34bc7",
+          "event": "noMatch",
+          "conditions": [],
+          "next": "FFe8ff5e708c34948e769506f3dddecabb"
+        },
+        {
+          "uuid": "1347bf34-13ec-4abf-a824-337685fe7a24",
+          "event": "match",
+          "conditions": [
+            {
+              "type": "equal_to",
+              "friendly_name": "If value equal_to 1",
+              "value": "1"
+            }
+          ],
+          "next": "FF9a5aa1f8fa3288f0b52113f78f0da8db"
+        },
+        {
+          "uuid": "89260422-475f-4c12-b47f-51f61ecab0c1",
+          "event": "match",
+          "conditions": [
+            {
+              "type": "equal_to",
+              "friendly_name": "If value equal_to 2",
+              "value": "2"
+            }
+          ],
+          "next": "FF4c4be205cd146decf23074e27398be61"
+        }
+      ]
+    },
+    {
+      "sid": "FF9a5aa1f8fa3288f0b52113f78f0da8db",
+      "name": "set_variables_3",
+      "type": "SetVariables",
+      "properties": {
+        "variables": [
+          {
+            "key": "count",
+            "value": "{% if flow.variables.count %}\n  {{flow.variables.count | plus: 1}}\n{% else %}\n  1\n{% endif %}",
+            "index": 0
+          }
+        ],
+        "offset": {
+          "x": 680,
+          "y": 2290
+        }
+      },
+      "transitions": [
+        {
+          "widgetId": "FF5c30b7b0d6b0a6bdd0a373aed9daf913",
+          "uuid": "7b942fbf-3186-46b6-ab15-1bbc40160e5a",
+          "event": "next",
+          "conditions": [],
+          "next": "FF4c4be205cd146decf23074e27398be61"
+        }
+      ]
+    },
+    {
+      "sid": "FF4c4be205cd146decf23074e27398be61",
+      "name": "gather_symptoms",
+      "type": "Gather",
+      "properties": {
+        "loop": 1,
+        "timeout": "5",
+        "stop_gather": true,
+        "finish_on_key": "#",
+        "offset": {
+          "x": 1130,
+          "y": 2340
+        },
+        "language": null,
+        "gather_language": "en",
+        "voice": null,
+        "speech_timeout": "auto",
+        "profanity_filter": "true",
+        "play": null,
+        "say": "Are you experiencing any flu-like symptoms for example fever, difficulty in  breathing, body ache, sore throat, vomiting or diarrhea?    \n\nFor yes, press 1.\n\nFor no, press 2.",
+        "number_of_digits": "1"
+      },
+      "transitions": [
+        {
+          "widgetId": "FFf43a6d80fcaf11b1293a41b2ebabf0a2",
+          "uuid": "8c325e99-f914-44fc-b9fb-26e0409184ca",
+          "event": "keypress",
+          "conditions": [],
+          "next": "FFc74702e63ba703d1f3b12ebc7489cbe9"
+        },
+        {
+          "widgetId": "FFf43a6d80fcaf11b1293a41b2ebabf0a2",
+          "uuid": "2685bb7f-b6b8-459f-9d10-3ee38e9d0ade",
+          "event": "speech",
+          "conditions": [],
+          "next": null
+        },
+        {
+          "widgetId": "FFf43a6d80fcaf11b1293a41b2ebabf0a2",
+          "uuid": "b0312484-b665-4fc2-b8df-fd288cd227f9",
+          "event": "timeout",
+          "conditions": [],
+          "next": null
+        }
+      ]
+    },
+    {
+      "sid": "FFc74702e63ba703d1f3b12ebc7489cbe9",
+      "name": "split_key_press_4",
+      "type": "Branch",
+      "properties": {
+        "offset": {
+          "x": 1150,
+          "y": 2580
+        },
+        "input": "{{widgets.gather_symptoms.Digits}}"
+      },
+      "transitions": [
+        {
+          "widgetId": "FF9bd246a6202524e6e719b1a5198b755b",
+          "uuid": "981cdb77-ed10-4fda-b08f-8100be0b45f8",
+          "event": "noMatch",
+          "conditions": [],
+          "next": "FFca9f7c91639d2dab10aaab844086550c"
+        },
+        {
+          "uuid": "daddc350-bf91-412c-95a2-86e76640abc1",
+          "event": "match",
+          "conditions": [
+            {
+              "type": "equal_to",
+              "friendly_name": "If value equal_to 1",
+              "value": "1"
+            }
+          ],
+          "next": "FF52cb5602067ca2314faa8dc11643fa6c"
+        },
+        {
+          "uuid": "5b614c1c-8b50-45c1-8a11-38c68dc74e47",
+          "event": "match",
+          "conditions": [
+            {
+              "type": "equal_to",
+              "friendly_name": "If value equal_to 2",
+              "value": "2"
+            }
+          ],
+          "next": "FFaf26efa11f8db9f37b1664727c21a5a2"
+        }
+      ]
+    },
+    {
+      "sid": "FF52cb5602067ca2314faa8dc11643fa6c",
+      "name": "set_variables_4",
+      "type": "SetVariables",
+      "properties": {
+        "variables": [
+          {
+            "key": "count",
+            "value": "{% if flow.variables.count %}\n  {{flow.variables.count | plus: 6}}\n{% else %}\n  2\n{% endif %}",
+            "index": 0
+          }
+        ],
+        "offset": {
+          "x": 830,
+          "y": 2830
+        }
+      },
+      "transitions": [
+        {
+          "widgetId": "FF5c30b7b0d6b0a6bdd0a373aed9daf913",
+          "uuid": "5bab97be-1f34-4893-bd75-e0ceaf38fd95",
+          "event": "next",
+          "conditions": [],
+          "next": "FFaf26efa11f8db9f37b1664727c21a5a2"
+        }
+      ]
+    },
+    {
+      "sid": "FFaf26efa11f8db9f37b1664727c21a5a2",
+      "name": "gather_conditions",
+      "type": "Gather",
+      "properties": {
+        "loop": 1,
+        "timeout": "5",
+        "stop_gather": true,
+        "finish_on_key": "#",
+        "offset": {
+          "x": 1390,
+          "y": 2850
+        },
+        "language": null,
+        "gather_language": "en",
+        "voice": null,
+        "speech_timeout": "auto",
+        "profanity_filter": "true",
+        "play": null,
+        "say": "Do you have any of the following conditions?\n\nDiabetes, chronic lung disease, asthma, pregnancy, liver cirrhosis, weak immune system, kidney failure that needs dialysis, conditions that make it harder to cough, extreme obesity, or congestive heart failure?  \n\nFor yes, press 1.\n\nFor no, press 2.",
+        "number_of_digits": "1"
+      },
+      "transitions": [
+        {
+          "widgetId": "FFf43a6d80fcaf11b1293a41b2ebabf0a2",
+          "uuid": "6b78f0fa-7b2b-426c-b2de-5d75f8f39325",
+          "event": "keypress",
+          "conditions": [],
+          "next": "FF7cc8bb9ac17443eb7539603fdbb19a07"
+        },
+        {
+          "widgetId": "FFf43a6d80fcaf11b1293a41b2ebabf0a2",
+          "uuid": "4f6697d7-edfa-43c4-8ec3-46f05c37cfd1",
+          "event": "speech",
+          "conditions": [],
+          "next": null
+        },
+        {
+          "widgetId": "FFf43a6d80fcaf11b1293a41b2ebabf0a2",
+          "uuid": "e9fadb42-9777-4ee1-bcd0-36152536ed5b",
+          "event": "timeout",
+          "conditions": [],
+          "next": null
+        }
+      ]
+    },
+    {
+      "sid": "FF7cc8bb9ac17443eb7539603fdbb19a07",
+      "name": "split_key_press_5",
+      "type": "Branch",
+      "properties": {
+        "offset": {
+          "x": 1350,
+          "y": 3130
+        },
+        "input": "{{widgets.gather_conditions.Digits}}"
+      },
+      "transitions": [
+        {
+          "widgetId": "FF9bd246a6202524e6e719b1a5198b755b",
+          "uuid": "e3fcbbb8-09a3-4f10-9b52-a3f6444ab829",
+          "event": "noMatch",
+          "conditions": [],
+          "next": "FFb2f748e0707bbcb05ace97935562ce06"
+        },
+        {
+          "uuid": "98333cc6-4033-4e84-a446-559cf5051ce7",
+          "event": "match",
+          "conditions": [
+            {
+              "type": "equal_to",
+              "friendly_name": "If value equal_to 1",
+              "value": "1"
+            }
+          ],
+          "next": "FFa8e28884aab059bde7e73310ff61f8d9"
+        },
+        {
+          "uuid": "0ec1bdd5-59b3-4d9e-a529-87702a01a6be",
+          "event": "match",
+          "conditions": [
+            {
+              "type": "equal_to",
+              "friendly_name": "If value equal_to 2",
+              "value": "2"
+            }
+          ],
+          "next": "FFffc6bdd0f09bb223b07774addaa350a8"
+        }
+      ]
+    },
+    {
+      "sid": "FFa8e28884aab059bde7e73310ff61f8d9",
+      "name": "set_variables_5",
+      "type": "SetVariables",
+      "properties": {
+        "variables": [
+          {
+            "key": "count",
+            "value": "{% if flow.variables.count %}\n  {{flow.variables.count | plus: 2}}\n{% else %}\n  1\n{% endif %}",
+            "index": 0
+          }
+        ],
+        "offset": {
+          "x": 1130,
+          "y": 3400
+        }
+      },
+      "transitions": [
+        {
+          "widgetId": "FF5c30b7b0d6b0a6bdd0a373aed9daf913",
+          "uuid": "38829bf7-8aed-4ac7-b39c-14d4fefc562a",
+          "event": "next",
+          "conditions": [],
+          "next": "FFffc6bdd0f09bb223b07774addaa350a8"
+        }
+      ]
+    },
+    {
+      "sid": "FFffc6bdd0f09bb223b07774addaa350a8",
+      "name": "split_4",
+      "type": "Branch",
+      "properties": {
+        "offset": {
+          "x": 1480,
+          "y": 3500
+        },
+        "input": "{{flow.variables.count}}"
+      },
+      "transitions": [
+        {
+          "widgetId": "FFffc6bdd0f09bb223b07774addaa350a8",
+          "uuid": "896cfd0e-c35f-4c4e-b2b3-6cb928053c71",
+          "event": "noMatch",
+          "conditions": [],
+          "next": null
+        },
+        {
+          "uuid": "394db2bc-fbf4-43ef-abcb-31f1aba2329c",
+          "event": "match",
+          "conditions": [
+            {
+              "type": "greater_than",
+              "friendly_name": "If value greater_than 7",
+              "value": "7"
+            }
+          ],
+          "next": "FFb257cc760f0728ee3b42cbc77a2964bf"
+        },
+        {
+          "uuid": "8b70741a-3f14-4468-bb25-0d68bf734cfc",
+          "event": "match",
+          "conditions": [
+            {
+              "type": "equal_to",
+              "friendly_name": "If value equals_to 6",
+              "value": "6"
+            }
+          ],
+          "next": "FF849ab75d15ed1428844af0c20aa25a95"
+        },
+        {
+          "uuid": "9412c92e-765f-41fd-afea-0819ad19e9e9",
+          "event": "match",
+          "conditions": [
+            {
+              "type": "less_than",
+              "friendly_name": "If value lesser_than 5",
+              "value": "5"
+            }
+          ],
+          "next": "FF363ad1a1d774f2c687fe89a6ac18ae16"
+        },
+        {
+          "uuid": "3b200742-747d-48f3-be51-40dd2cbb3b3a",
+          "event": "match",
+          "conditions": [
+            {
+              "type": "equal_to",
+              "friendly_name": "If value equal_to 7",
+              "value": "7"
+            }
+          ],
+          "next": "FF849ab75d15ed1428844af0c20aa25a95"
+        },
+        {
+          "uuid": "85e9b01d-7136-4a37-968c-6dfb806e3579",
+          "event": "match",
+          "conditions": [
+            {
+              "type": "equal_to",
+              "friendly_name": "If value equal_to 5",
+              "value": "5"
+            }
+          ],
+          "next": "FF8c966cf1d4d060b6ce3e0cc1bb306e9a"
+        }
+      ]
+    },
+    {
+      "sid": "FFb257cc760f0728ee3b42cbc77a2964bf",
+      "name": "say_play_3",
+      "type": "SayPlay",
+      "properties": {
+        "loop": 1,
+        "offset": {
+          "x": 1390,
+          "y": 3830
+        },
+        "say": "Based on your responses, you should contact your healthcare provider.\n\nYou should reach out to your doctor’s office or local health department for more information. Please stay at home and avoid close contact with other people, including your family members. If possible, allocate a room and a restroom for yourself for at least 7 days from when you first experienced symptoms. If your symptoms worsen, contact your doctor’s office immediately. \n\nThank you for using our service.\nStay safe and take care.",
+        "play": null,
+        "language": null
+      },
+      "transitions": [
+        {
+          "widgetId": "FFb257cc760f0728ee3b42cbc77a2964bf",
+          "uuid": "a63a1646-4576-40f0-b728-0809a2dfbc54",
+          "event": "audioComplete",
+          "conditions": [],
+          "next": null
+        }
+      ]
+    },
+    {
+      "sid": "FF849ab75d15ed1428844af0c20aa25a95",
+      "name": "say_play_4",
+      "type": "SayPlay",
+      "properties": {
+        "loop": 1,
+        "offset": {
+          "x": 1780.0693807943294,
+          "y": 3808.056082221287
+        },
+        "say": "Based on your responses, you should self-isolate.\n\nPlease stay at home and avoid close contact with other people, including your family members. If possible, allocate a room and a restroom for yourself for at least 7 days from when you first experienced symptoms. Your isolation can end if you stop showing symptoms or you remain fever free for 72 hours. \n\nSelf-isolation is difficult but can help slow the spread of COVID-19 to others and protect your community. \n\nThank you for using our service.\n Stay safe and take care.",
+        "play": null
+      },
+      "transitions": [
+        {
+          "widgetId": "FF849ab75d15ed1428844af0c20aa25a95",
+          "uuid": "8006eab8-1897-4ac6-905a-2e912afafac7",
+          "event": "audioComplete",
+          "conditions": [],
+          "next": null
+        }
+      ]
+    },
+    {
+      "sid": "FF363ad1a1d774f2c687fe89a6ac18ae16",
+      "name": "say_play_5",
+      "type": "SayPlay",
+      "properties": {
+        "loop": 1,
+        "offset": {
+          "x": 2100,
+          "y": 3820
+        },
+        "say": "Based on your responses, you should continue practicing social distancing. \n\nPlease continue observing social distancing by maintaining at least six feet distance from others and avoid leaving the house for non-essential activities. If your response to any of these questions changes, call this helpline number again. \n\nThank you for using our service.\n Stay safe and take care.",
+        "play": null
+      },
+      "transitions": [
+        {
+          "widgetId": "FF849ab75d15ed1428844af0c20aa25a95",
+          "uuid": "61bf433f-b6ba-4088-beaa-bb94f077ef23",
+          "event": "audioComplete",
+          "conditions": [],
+          "next": null
+        }
+      ]
+    },
+    {
+      "sid": "FF8186571392a37a64a95d784b7afcaecd",
+      "name": "say_play_invalid_message",
+      "type": "SayPlay",
+      "properties": {
+        "loop": 1,
+        "offset": {
+          "x": -590,
+          "y": 580
+        },
+        "say": "You have selected an invalid choice. Please start again.",
+        "play": null
+      },
+      "transitions": [
+        {
+          "widgetId": "FF8186571392a37a64a95d784b7afcaecd",
+          "uuid": "5536ac35-7b92-4329-a25a-464d2c28f1bb",
+          "event": "audioComplete",
+          "conditions": [],
+          "next": "FF98a5e86153f921f99a788bfc510e3e10"
+        }
+      ]
+    },
+    {
+      "sid": "FF397c13cce3c38a1c59859cef4f1361f7",
+      "name": "say_play_invalid_message_1",
+      "type": "SayPlay",
+      "properties": {
+        "loop": 1,
+        "offset": {
+          "x": -410,
+          "y": 1080
+        },
+        "say": "You have selected an invalid choice. Please start again.",
+        "play": null
+      },
+      "transitions": [
+        {
+          "widgetId": "FF8186571392a37a64a95d784b7afcaecd",
+          "uuid": "44a79229-38f8-478f-989f-62c0090cdc8c",
+          "event": "audioComplete",
+          "conditions": [],
+          "next": "FFf43a6d80fcaf11b1293a41b2ebabf0a2"
+        }
+      ]
+    },
+    {
+      "sid": "FF567ec42bbb2162a42b95c12a396bcc42",
+      "name": "say_play_invalid_message_2",
+      "type": "SayPlay",
+      "properties": {
+        "loop": 1,
+        "offset": {
+          "x": -170,
+          "y": 1670
+        },
+        "say": "You have selected an invalid choice. Please start again.",
+        "play": null
+      },
+      "transitions": [
+        {
+          "widgetId": "FF8186571392a37a64a95d784b7afcaecd",
+          "uuid": "11ef68e3-3c20-40b3-8382-2a7191da1d89",
+          "event": "audioComplete",
+          "conditions": [],
+          "next": "FFd969e171a787cc8b914d76536d9dac21"
+        }
+      ]
+    },
+    {
+      "sid": "FFe8ff5e708c34948e769506f3dddecabb",
+      "name": "say_play_invalid_message_3",
+      "type": "SayPlay",
+      "properties": {
+        "loop": 1,
+        "offset": {
+          "x": 240,
+          "y": 2160
+        },
+        "say": "You have selected an invalid choice. Please start again.",
+        "play": null
+      },
+      "transitions": [
+        {
+          "widgetId": "FF8186571392a37a64a95d784b7afcaecd",
+          "uuid": "877d967f-5b42-4f8e-b9bb-9b17cefbacf0",
+          "event": "audioComplete",
+          "conditions": [],
+          "next": "FF56e4365f9e9a4fd0405dc46c5e8e5053"
+        }
+      ]
+    },
+    {
+      "sid": "FFca9f7c91639d2dab10aaab844086550c",
+      "name": "say_play_invalid_message_4",
+      "type": "SayPlay",
+      "properties": {
+        "loop": 1,
+        "offset": {
+          "x": 400,
+          "y": 2620
+        },
+        "say": "You have selected an invalid choice. Please start again.",
+        "play": null
+      },
+      "transitions": [
+        {
+          "widgetId": "FF8186571392a37a64a95d784b7afcaecd",
+          "uuid": "c1acf5b4-472b-449d-92db-92ee279b46df",
+          "event": "audioComplete",
+          "conditions": [],
+          "next": "FF4c4be205cd146decf23074e27398be61"
+        }
+      ]
+    },
+    {
+      "sid": "FFb2f748e0707bbcb05ace97935562ce06",
+      "name": "say_play_invalid_message_5",
+      "type": "SayPlay",
+      "properties": {
+        "loop": 1,
+        "offset": {
+          "x": 660,
+          "y": 3180
+        },
+        "say": "You have selected an invalid choice. Please start again.",
+        "play": null
+      },
+      "transitions": [
+        {
+          "widgetId": "FF8186571392a37a64a95d784b7afcaecd",
+          "uuid": "96d90548-7ba3-40e9-a0f6-04d0eddc431a",
+          "event": "audioComplete",
+          "conditions": [],
+          "next": "FFaf26efa11f8db9f37b1664727c21a5a2"
+        }
+      ]
+    },
+    {
+      "sid": "FFff631435b1f33a44618e3aebf018c070",
+      "name": "set_initial_variables",
+      "type": "SetVariables",
+      "properties": {
+        "variables": [
+          {
+            "key": "count",
+            "value": "{% if flow.variables.count %}\n{% else %}\n  0\n{% endif %}",
+            "index": 0
+          }
+        ],
+        "offset": {
+          "x": 450,
+          "y": 540
+        }
+      },
+      "transitions": [
+        {
+          "widgetId": "FF5c30b7b0d6b0a6bdd0a373aed9daf913",
+          "uuid": "3594c1bf-6a14-47e7-99fe-0d18c9f97edb",
+          "event": "next",
+          "conditions": [],
+          "next": "FFf43a6d80fcaf11b1293a41b2ebabf0a2"
+        }
+      ]
+    },
+    {
+      "sid": "FF8ff06069366644a51ed340f5d0f933a9",
+      "name": "gather_exposure",
+      "type": "Gather",
+      "properties": {
+        "loop": 1,
+        "timeout": "5",
+        "stop_gather": true,
+        "finish_on_key": "#",
+        "offset": {
+          "x": 1180,
+          "y": 1460
+        },
+        "language": null,
+        "gather_language": "en",
+        "voice": null,
+        "speech_timeout": "auto",
+        "profanity_filter": "true",
+        "play": null,
+        "say": "During the last 14 days what was your exposure to others who have been tested positive for COVID-19 ?\n\nPress 1, if you have been within six feet of someone who was sick or exposed to cough or sneeze.\n\nPress 2, if you were more than six feet away and not exposed to cough or sneeze.",
+        "number_of_digits": "6"
+      },
+      "transitions": [
+        {
+          "widgetId": "FFf43a6d80fcaf11b1293a41b2ebabf0a2",
+          "uuid": "b5f73d92-c3d6-4985-8b67-d49fc19c394e",
+          "event": "keypress",
+          "conditions": [],
+          "next": "FF1ac7d28fb7cb67cc719d4075bc3c5519"
+        },
+        {
+          "widgetId": "FFf43a6d80fcaf11b1293a41b2ebabf0a2",
+          "uuid": "27586fe0-64a8-47e1-9244-308c1fe21974",
+          "event": "speech",
+          "conditions": [],
+          "next": null
+        },
+        {
+          "widgetId": "FFf43a6d80fcaf11b1293a41b2ebabf0a2",
+          "uuid": "0af06add-8a63-4339-8ef0-985444b7f248",
+          "event": "timeout",
+          "conditions": [],
+          "next": null
+        }
+      ]
+    },
+    {
+      "sid": "FF1ac7d28fb7cb67cc719d4075bc3c5519",
+      "name": "split_key_press_2_5",
+      "type": "Branch",
+      "properties": {
+        "offset": {
+          "x": 1230,
+          "y": 1700
+        },
+        "input": "{{widgets.gather_exposure.Digits}}"
+      },
+      "transitions": [
+        {
+          "widgetId": "FF9bd246a6202524e6e719b1a5198b755b",
+          "uuid": "61e95ba2-4535-4643-a646-c01534c31a22",
+          "event": "noMatch",
+          "conditions": [],
+          "next": "FF3f042a41e0834672f35ba7761b2b8b4b"
+        },
+        {
+          "uuid": "2bf12ab6-578b-41cb-9de3-a3e33b81b3b1",
+          "event": "match",
+          "conditions": [
+            {
+              "type": "equal_to",
+              "friendly_name": "If value equal_to 1",
+              "value": "1"
+            }
+          ],
+          "next": "FFfdad7202b3378b8c01fee62de13ac747"
+        },
+        {
+          "uuid": "b19c2eaf-99bb-446b-835e-bc0b619b5ad7",
+          "event": "match",
+          "conditions": [
+            {
+              "type": "equal_to",
+              "friendly_name": "If value equal_to 2",
+              "value": "2"
+            }
+          ],
+          "next": "FF04f234d473bec97a099a8533f69b80c2"
+        }
+      ]
+    },
+    {
+      "sid": "FF3f042a41e0834672f35ba7761b2b8b4b",
+      "name": "Copy_of_say_play_invalid_message_2",
+      "type": "SayPlay",
+      "properties": {
+        "loop": 1,
+        "offset": {
+          "x": 1780,
+          "y": 1430
+        },
+        "say": "You have selected an invalid choice. Please start again.",
+        "play": null
+      },
+      "transitions": [
+        {
+          "widgetId": "FF8186571392a37a64a95d784b7afcaecd",
+          "uuid": "bcffbca0-cf3f-41fb-a905-2a33889dc563",
+          "event": "audioComplete",
+          "conditions": [],
+          "next": "FF8ff06069366644a51ed340f5d0f933a9"
+        }
+      ]
+    },
+    {
+      "sid": "FFfdad7202b3378b8c01fee62de13ac747",
+      "name": "set_variables_6",
+      "type": "SetVariables",
+      "properties": {
+        "variables": [
+          {
+            "key": "count",
+            "value": "{% if flow.variables.count %}\n  {{flow.variables.count | plus: 3}}\n{% else %}\n  1\n{% endif %}",
+            "index": 0
+          }
+        ],
+        "offset": {
+          "x": 1270,
+          "y": 1930
+        }
+      },
+      "transitions": [
+        {
+          "widgetId": "FF5c30b7b0d6b0a6bdd0a373aed9daf913",
+          "uuid": "9cf27c48-62bb-449d-bf05-4716a0ecb860",
+          "event": "next",
+          "conditions": [],
+          "next": "FF56e4365f9e9a4fd0405dc46c5e8e5053"
+        }
+      ]
+    },
+    {
+      "sid": "FF04f234d473bec97a099a8533f69b80c2",
+      "name": "set_variables_7",
+      "type": "SetVariables",
+      "properties": {
+        "variables": [
+          {
+            "key": "count",
+            "value": "{% if flow.variables.count %}\n  {{flow.variables.count | plus: 2}}\n{% else %}\n  1\n{% endif %}",
+            "index": 0
+          }
+        ],
+        "offset": {
+          "x": 1650,
+          "y": 1910
+        }
+      },
+      "transitions": [
+        {
+          "widgetId": "FF5c30b7b0d6b0a6bdd0a373aed9daf913",
+          "uuid": "877b7b26-827f-431b-a152-d2494d8e949f",
+          "event": "next",
+          "conditions": [],
+          "next": "FF56e4365f9e9a4fd0405dc46c5e8e5053"
+        }
+      ]
+    },
+    {
+      "sid": "FF8c966cf1d4d060b6ce3e0cc1bb306e9a",
+      "name": "say_play_9",
+      "type": "SayPlay",
+      "properties": {
+        "loop": 1,
+        "offset": {
+          "x": 2450,
+          "y": 3760
+        },
+        "say": "Based on your responses, you should quarantine yourself at home.\n\nPlease stay at home for the next 14 days and see if any symptoms appear. Also, continue observing social distancing by maintaining at least six feet distance from others and avoid leaving the house for non-essential activities. \n\nThank you for using our service.\nStay safe and take care.",
+        "play": null
+      },
+      "transitions": [
+        {
+          "widgetId": "FF8c966cf1d4d060b6ce3e0cc1bb306e9a",
+          "uuid": "d52b91ed-eb19-4c51-83a4-c905b47855d2",
+          "event": "audioComplete",
+          "conditions": [],
+          "next": null
+        }
+      ]
+    }
+  ]
+}

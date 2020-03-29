@@ -26,3 +26,7 @@
 
 
 <p align="center"> Our goal is to help flatten the curve and offer greater accessibility to COVID-19 screening services in these trying times. We hope everyone stays safe. Happy coding! </p>
+
+<p align="center">To access the SMS screening service, text COVID to + 16698005670 </p>
+<p align="center">To access the chatbot, text COVID19BOT to +13233100369 </p>
+<p align="center">To access the IVR helpline, call +13104942720 </p>

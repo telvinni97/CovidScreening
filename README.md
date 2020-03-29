@@ -1,6 +1,6 @@
 # Team QuaranTwililo's LA Hacks 2020 Submission!!
 
-<p align="center"><img src= "https://imgur.com/a/UGRUTEr"></p>
+<p align="center"><img src= "https://gyazo.com/0138ef915990b0b0ffb6413990cbe70b"></p>
 
 
 <p align="center"> :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire:</p>

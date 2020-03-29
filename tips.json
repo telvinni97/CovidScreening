@@ -1,0 +1,10 @@
+{
+	"actions": [
+		{
+			"say": "Please stay indoors & wash your hands! Continue to observe social distancing by maintaining a six feet distance from others and avoid leaving the house for non-essential activities."
+		},
+		{
+			"listen": true
+		}
+	]
+}

@@ -1,0 +1,16 @@
+{
+	"actions": [
+		{
+			"say": "Here are some important numbers and people to reach out to if you are experiencing personal issues with COVID-19:"
+		},
+		{
+			"say": "Your personal healthcare provider or +911"
+		},
+		{
+			"say": "Call +1 3104942720 or text +1 669 800 5670 to take a quick self-assessing survey on your chances of having COVID-19"
+		},
+    {
+      "say": "For more information on the virus, please visit www.cdc.gov"
+    }
+	]
+}

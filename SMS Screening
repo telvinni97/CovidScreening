@@ -1,0 +1,130 @@
+from twilio.twiml.messaging_response import MessagingResponse
+from flask import Flask, request, make_response
+from twilio import twiml
+
+counter, risk = 0, 0
+app = Flask(__name__)
+
+@app.route("/sms", methods=['GET', 'POST'])
+
+def incoming_sms():
+    global counter
+    global risk
+    # Get the message the user sent our Twilio number
+    body = request.values.get('Body', None)
+
+    # Start our TwiML response
+    resp = MessagingResponse()
+    # Determine the right reply for this message
+    if body == 'COVID':
+        counter, risk = 0, 0
+        resp.message("Hello, welcome to our COVID-19 screening service.\n"
+                     "Please note that this service is not a substitute for professional medical advice, diagnosis or treatment.\n"
+                     "If you are experiencing any of the following symptoms:\n"
+                     "- Constant chest pain or pressure\n"
+                     "- Extreme difficulty breathing\n"
+                     "- Worsening coughing"
+                     "- Severe, constant dizziness or lightheadedness\n"
+                     "- Slurred speech\n"
+                     "- Difficulty waking up\n"
+                     "Call 911 or seek professional medical assistance.\n"
+                     "Enter anything to continue.")
+        counter += 1
+    elif counter == 1:
+        # Traveling internationally is worth 3 points due to airport risk and global spreading.
+        resp.message('Have you traveled internationally within the last 14 days?\n'
+                     "Enter 1 for Yes or 2 for No.")
+        counter += 1
+    elif counter == 2:
+        if body == '1':
+            risk += 3
+        # Being in a known outbreak area makes you more likely to have contracted COVID-19.
+        resp.message("In the last 14 days, have you been in an area where COVID-19 is widespread?\n"
+           "Enter 1 for Yes or 2 for No.\n"
+           "Enter 3 if you're not sure.")
+        counter += 1
+    elif counter == 3:
+        if body == '1':
+            risk += 1
+        # The chance of infection increases greatly if you were in proximity to a known carrier.
+        resp.message("In the last 14 days, what is your exposure to others who are known to have COVID-19?\n"
+            "Enter 1 if you've been within 6 feet of someone who was sick or exposed to a cough or sneeze.\n"
+            "Enter 2 if you were more than 6 feet away and not exposed to a cough or sneeze.\n"
+            "Enter 3 if you've had no exposure.")
+        counter += 1
+    elif counter == 4:
+        if body == '1':
+            risk += 3
+        elif body == '2':
+            risk += 2
+        # Hospital settings are more dangerous than usual at this point in time.
+        resp.message("Do you live or work in a hospital or any other care facility?\n"
+                     "Enter 1 for Yes or 2 for No.")
+        counter += 1
+    elif counter == 5:
+        if body == '1':
+            risk += 1
+        # Those with flulike symptoms should take extra care to be ready to self-isolate.
+        resp.message("Are you experiencing any flu-like symptoms such as a fever, difficulty breathing, "
+                    "body aches, a sore throat, vomiting or diarrhea?\n"
+                    "Enter 1 for Yes or 2 for No.")
+        counter += 1
+    elif counter == 6:
+        if body == '1':
+            risk += 6
+        # Those with chronic health conditions or weaker immune systems should be quicker to self-isolate.
+        resp.message("Are you over the age of 65 or have any of the following pre-existing health conditions?\n"
+                     "- Diabetes\n"
+                     "- Asthma\n"
+                     "- Chronic lung disease\n"
+                     "- Liver cirrhosis\n"
+                     "- Weak immune system\n"
+                     "- Kidney failure\n"
+                     "- Conditions that make it difficult to cough\n"
+                     "- Extreme obesity\n"
+                     "- Congestive heart failure\n"
+                     "Enter 1 for Yes or 2 for No.")
+        counter += 1
+    elif counter == 7:
+        if body == '1':
+            risk += 2
+
+        if risk < 5:
+            resp.message("Continue to practice social distancing.\n"
+                         "As of now, your responses suggest that your risk of exposure to COVID-19 is low. Continue to observe social distancing by maintaining a six feet distance from others and avoid leaving the house for non-essential activities. If your response to any of these questions changes, take the questionnaire again.")
+        elif risk < 6:
+            resp.message("You should quarantine at home.\n"
+                         "Your responses indicate that you may have been exposed to COVID-19. Stay at home for the next 14 days and see if any symptoms appear. You should also try to limit your contact with other people as much as possible.")
+        elif risk < 8:
+            resp.message("You should self-isolate.\n"
+                         "Your responses indicate that you should stay at home and avoid close contact with other people, including your family members. If possible, allocate a room and restroom for yourself for at least 7 days from when you first experienced symptoms. Your isolation can end if you stop showing symptoms or remain fever free for 72 hours. Self-isolation is difficult but can help slow the spread of COVID-19 to others and protect your community.")
+        else:
+            resp.message("Contact your healthcare provider.\n"
+                         "Your responses indicate that you may need testing for COVID-19. You should reach out to your doctor’s office or local health department for more information. Stay at home and avoid close contact with other people, including your family members. If possible, allocate a room and a restroom for yourself for at least 7 days from when you first experienced symptoms. If your symptoms worsen, contact your doctor’s office immediately.")
+        resp.message("Press 1 to go to the Center for Disease Control and Prevention's website for more information on how to protect yourself from COVID-19.\n"
+                     "Press 2 to begin this screening service again.")
+        counter += 1
+    elif counter >= 8:
+        if body == '1':
+            resp.message("https://www.cdc.gov/coronavirus/2019-ncov/index.html\n"
+                         "Type 'COVID' to begin this screening service again.")
+
+        elif body == '2':
+            resp.message("Hello, welcome to COVID-19 screening service.\n"
+                         "Please note that this service is not a substitute for professional medical advice, diagnosis or treatment.\n"
+                         "If you are experiencing any of the following symptoms:\n"
+                         "- Constant chest pain or pressure\n"
+                         "- Extreme difficulty breathing\n"
+                         "- Severe, constant dizziness or lightheadedness\n"
+                         "- Slurred speech\n"
+                         "- Difficulty waking up\n"
+                         "Call 911 or seek professional medical assistance.\n"
+                         "Type anything to continue.")
+            counter, risk = 1, 0
+        else:
+            counter, risk = 0, 0
+
+    return str(resp)
+
+if __name__ == "__main__":
+    app.run(debug=True)

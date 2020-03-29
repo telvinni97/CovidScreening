@@ -1,0 +1,13 @@
+{
+	"actions": [
+		{
+      "say": "COVID-19 is a new infectious disease that is currently affecting everyone worldwide. It causes respiratory illness and difficulty breathing"
+		},
+    {
+      "say": "If you are experiencing any symptoms, consider taking our survey by texting +1 669 800 5670 or by calling +1 3104942720"
+    },
+		{
+			"listen": true
+		}
+	]
+}

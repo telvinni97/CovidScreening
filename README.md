@@ -1,6 +1,6 @@
 # Team QuaranTwililo's LA Hacks 2020 Submission!!
 
-<p align="center"><img src= "https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/challenge_thumbnails/000/787/815/datas/original.png"></p>
+<p align="center"><img src= "https://imgur.com/a/UGRUTEr"></p>
 
 
 <p align="center"> :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire:</p>

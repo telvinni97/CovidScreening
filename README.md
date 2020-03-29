@@ -19,4 +19,7 @@
 
 <p align="center"> Those at medium to high risk will be advised to contact their healthcare providers and be tested for COVID-19.</p>
 
+<p align="center"> We've also created a chatbot that can detect key words (by voice or by text) and help guide users towards relevant resources, including recommendations on fun actvities to perform indoors and resources and good health practices to maintain. The chatbot can also directly link users to both the text and phone hotlines for our screening service. </p>
+
+
 <p align="center"> Our goal is to help flatten the curve and offer greater accessibility to COVID-19 screening services in these trying times. We hope everyone stays safe. Happy coding! </p>
